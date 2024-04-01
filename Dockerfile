@@ -5,6 +5,7 @@ COPY . /cybint
 RUN pip3 install --no-cache-dir -r /cybint/requirements.txt
 RUN python3 -m nltk.downloader -d ./nltk_data punkt
 RUN python3 -m nltk.downloader -d ./nltk_data averaged_perceptron_tagger
+RUN chmod 755 /cybint/manage.py
 
 EXPOSE 8000
 

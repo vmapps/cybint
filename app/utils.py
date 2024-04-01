@@ -80,7 +80,7 @@ def initProjects(mongoc,folder):
         cron = open('/etc/crontabs/daemon', 'w')
         cron.write('# crontab for cybint\n')
         for p in projects:
-            cron.write('*/10    *   *   *   *   python3 /cybint/manage.py --project {} --articles >/dev/null 2>&1\n'.format(p))
+            cron.write('*/10\t*\t*\t*\t*\tpython3 /cybint/manage.py --project {} --articles >/dev/null 2>&1\n'.format(p))
         cron.close()
 
     return projects
