@@ -24,7 +24,7 @@ Following Python packages are required
 - `pymongo` from https://github.com/mongodb/mongo-python-driver
 - `pyyaml` from https://pyyaml.org/
 
-Following NTLK packages are required
+Following NLTK packages are required
 
 - `punkt`
 - `averaged_perceptron_tagger`
@@ -32,8 +32,8 @@ Following NTLK packages are required
 They could be installed using following commands
 
 ```sh
-python3 -m nltk.downloader -d ./nltk_data punkt
-python3 -m nltk.downloader -d ./nltk_data averaged_perceptron_tagger
+python3 -m nltk.downloader -d <path-to-cybint>/nltk_data punkt
+python3 -m nltk.downloader -d <path-to-cybint>/nltk_data averaged_perceptron_tagger
 ```
 
 ## Configuration
