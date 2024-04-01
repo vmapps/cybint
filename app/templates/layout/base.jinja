@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Styles -->
+    <link rel="stylesheet"
+        href="{{ url_for('static',filename='bootstrap/5.3.3/css/bootstrap.min.css',_external=False) }}">
+    <link rel=" stylesheet"
+        href="{{ url_for('static',filename='bootstrap-icons/1.11.3/font/bootstrap-icons.min.css',_external=False) }}">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/pdf.css',_external=False) }}" media="print">
+    <!-- Javascript -->
+    <script src="{{ url_for('static',filename='bootstrap/5.3.3/js/bootstrap.min.js',_external=False) }}"></script>
+    <script src="{{ url_for('static',filename='html2pdf/html2pdf.bundle.min.js',_external=False) }}"></script>
+    <title>Cyber Intelligence</title>
+</head>
+
+<body>
+
+    <script>
+        function setProject(select) {
+            const options = {}
+
+            fetch('/projects/' + select.value, options)
+                .then(response => response.json())
+                .then(data => location.reload())
+                .catch(error => console.error(error));
+        }
+
+        function exportPDF() {
+
+            var content = document.getElementById('content')
+            var options = { filename: 'bookmarks.pdf' }
+
+            html2pdf().set(options).from(content).toPdf().get('pdf').then(function (pdf) {
+                window.open(pdf.output('bloburl'), '_blank');
+            });
+        }
+    </script>
+
+    <div class="container-fluid p-4" id="menu">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url_for('index') }}">{{ config['app']['description'] }}</a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <select class="form-select" aria-label="" onchange="setProject(this)">
+                            {% for item in config['PROJECTS'] %}
+                            <option value="{{ item }}" {% if item==session['project'] %}selected {% endif %}>
+                                {{ item }}</option>
+                            {% endfor %}
+                        </select>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('feeds') }}">Feeds</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('articles') }}">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('bookmarks') }}">Bookmarks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('keywords') }}">Keywords</a>
+                    </li>
+                </ul>
+                <form class="d-flex" action="{{ url_for('search') }}">
+                    <input class="form-control me-2" ms-auto type="text" name="q" placeholder="Search">
+                    <button class="btn btn-primary" type="button">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container-fluid p-4" id="content">
+        {% block header %}{% endblock %}
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <div class="container-fluid p-4" id="content">
+        <hr />
+        <p class="text-center">
+            <small>&copy; 2024 - {{ config['app']['author'] }} - {{ config['app']['contact'] }}</small>
+        </p>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+{% extends 'layout/base.jinja' %}
+
+{% block header %}
+<h3>Keywords</h3>
+<b>{{ data|length }}</b> items found</b>
+<hr />
+{% endblock %}
+
+{% block content %}
+<div class="text-center">
+    {% for key,val in data.items() %}
+    <a href="{{ url_for('articles',keyword=key) }}">{{ key }}</a>
+    <sup>
+        <span class="badge rounded-pill bg-danger text-white">{{
+            val }}</span>
+    </sup>
+    {% if loop.index % 8 == 0 %}
+    <br />
+    {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

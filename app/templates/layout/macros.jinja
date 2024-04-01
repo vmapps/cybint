@@ -1,0 +1,88 @@
+{%macro DisplayArticles(data) %}
+<script>
+    function setBookmark(button) {
+
+        if (button.getAttribute('data-bookmark') == 'True') {
+            button.setAttribute('data-bookmark', 'False')
+            button.innerHTML = '<i class="bi bi-star text-warning"></i>'
+            method = 'DELETE'
+        }
+        else {
+            button.setAttribute('data-bookmark', 'False')
+            button.innerHTML = '<i class="bi bi-star-fill text-warning"></i>'
+            method = 'PUT'
+        }
+
+        const options = {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                hash: button.getAttribute('data-hash')
+            })
+        };
+
+        fetch('/bookmarks', options)
+            .then(response => response.json())
+            //.then(data => console.log(data))
+            .catch(error => console.error(error));
+
+        // button.disabled = true
+        // button.parentElement.parentElement.remove()
+    }
+</script>
+
+{% for item in data %}
+<div>
+    <h6>
+        <a href="{{ item.link }}" target="_new" class="btn btn-sm btn-light"><i class="bi bi-book"></i></a>
+        <button class="btn btn-sm btn-light noprint" data-hash="{{ item.__hash }}" data-bookmark="{{ item.__bookmark }}"
+            onclick="setBookmark(this)">
+            {% if item.__bookmark %}
+            <i class="bi bi-star-fill text-warning"></i>
+            {% else %}
+            <i class="bi bi-star text-warning"></i>
+            {% endif %}
+        </button>
+        <a href="http://translate.google.com/translate?js=n&sl=auto&tl=fr&u={{ item.link }}" target="_new"
+            class="btn btn-sm btn-light"><i class="bi bi-translate"></i></a>
+        {{ item.title }}
+    </h6>
+    <small>
+        {% if item.get('summary') %}
+        {{ (item.summary|striptags)[:500] }}<br />
+        {% else %}
+        {{ item.title }}<br />
+        {% endif %}
+    </small>
+    <table class="table table-borderless table-sm small">
+        <tbody>
+            <tr>
+                <td scope="col" class="col-1"><b>Source:</b></td>
+                <td scope="col" class="col-2"><a href="{{ url_for('articles',feed=item.__feed) }}">{{
+                        item.__source }}</a>
+                </td>
+                <td scope="col" class="col-1"><b>Published:</b></td>
+                <td scope="col" class="col-2">
+                    {% if item.get('published') %}{{ item.published }}{% endif %}
+                </td>
+                <td scope="col" class="col-1"><b>Author:</b></td>
+                <td scope="col" class="col-2">
+                    {% if item.get('author') %}{{ item.author }}{% endif %}
+                </td>
+            </tr>
+            {% if item.get('tags') %}
+            <tr>
+                <td scope="col" class="col-1"><b>Tags:</b></td>
+                <td scope="col" class="col-2">
+                    {% for tag in item.tags %}
+                    <span class="badge badge-primary">{{ tag.term }}</span>
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <hr />
+</div>
+{% endfor %}
+{%endmacro%}

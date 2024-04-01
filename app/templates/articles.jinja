@@ -1,0 +1,13 @@
+{% extends 'layout/base.jinja' %}
+{% import 'layout/macros.jinja' as macros %}
+
+{% block header %}
+<h3>Articles</h3>
+<b>{{ data|length }}</b> items found</b>
+<button class="btn btn-sm btn-light noprint" onclick="exportPDF()"><i class="bi bi-file-pdf-fill"></i></button>
+<hr />
+{% endblock %}
+
+{% block content %}
+{{ macros.DisplayArticles(data) }}
+{% endblock %}

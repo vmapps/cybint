@@ -1,0 +1,14 @@
+{% extends 'layout/base.jinja' %}
+
+{% block header %}
+<h3>Error</h3>
+<hr />
+{% endblock %}
+
+{% block content %}
+
+<div class="alert alert-danger" role="alert">
+    {{ message }}
+</div>
+
+{% endblock %}

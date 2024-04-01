@@ -1,0 +1,42 @@
+#didierstevens,Didier Stevens Blog,https://blog.didierstevens.com/feed/
+#datasecuritybreach,Data Security Breach,https://datasecuritybreach.fr/feed/
+#feedburner-hackernews,Feedburner Hackernews,https://feeds.feedburner.com/TheHackersNews?format=xml
+feedburner-eset,Feedburner ESET,https://feeds.feedburner.com/eset/blog/
+feedburner-talos,Feedburner Talos,https://feeds.feedburner.com/feedburner/Talos?format=xml
+#feedburner-tenable,Feedburner Tenable,https://feeds.feedburner.com/tenable/qaXL?format=xml
+#gbhackers,GB Hackers,https://gbhackers.com/feed/
+#isc,Internet Storm Center,https://isc.sans.edu/rssfeed.xml
+#korben,Korben Info,https://korben.info/feed
+#krebsonsecurity,Krebs On Security,https://krebsonsecurity.com/feed/
+#linux-security,Linux Security,https://linuxsecurity.com/linuxsecurity_articles.xml
+nakedsecurity,Naked Security Sophos,https://nakedsecurity.sophos.com/feed/
+packetstorm,Packetstorm News,https://rss.packetstormsecurity.org/news/
+#securityaffairs,Security Affairs,https://securityaffairs.co/feed
+bleepingcomputer,Bleeping Computer,https://www.bleepingcomputer.com/feed/
+#ccn-cert,CCN CERT,https://www.ccn-cert.cni.es/component/obrss/rss-ultimas-vulnerabilidades.feed
+#anssi-alerts,ANSSI Alerts,https://www.cert.ssi.gouv.fr/alerte/feed/
+#anssi-cti,ANSSI Cyber Threat Intel,https://www.cert.ssi.gouv.fr/cti/feed/
+#anssi-ioc,ANSSI IoC,https://www.cert.ssi.gouv.fr/ioc/feed/
+#cisa-advisories,CISA Advisories,https://www.cisa.gov/uscert/ics/advisories/advisories.xml
+#cisa-alerts,CISA Alerts,https://www.cisa.gov/uscert/ncas/alerts.xml
+#cyberveille-sante,Cyber Veille Sante,https://www.cyberveille-sante.gouv.fr/alertes-et-vulnerabilites/rss.xml
+#darkreading,Dark Reading,https://www.darkreading.com/rss.xml
+#fireeye,FireEye Blog,https://www.fireeye.com/blog/threat-research/_jcr_content.feed
+#incibe-cert,Incibe CERT,https://www.incibe-cert.es/feed/avisos-seguridad/all
+#insinuator,Insinuator,https://www.insinuator.net/feed/
+#jpcert,Japanese CERT,https://www.jpcert.or.jp/english/rss/jpcert-en.rdf
+#kaspersky,Kaspersky Blog,https://www.kaspersky.com/blog/category/threats/feed/
+lemonde-pixels,Le Monde Pixels,https://www.lemonde.fr/pixels/rss_full.xml
+#macafee,Mac Afee Blog,https://www.mcafee.com/blogs/feed/
+#nextimpact,Next Impact,https://www.nextinpact.com/rss/news.xml
+#schneier,Bruce Schneier,https://www.schneier.com/feed/atom/
+#securelist,Secure List Kaspersky,https://www.securelist.com/en/rss/allupdates
+#silicon,Silicon,https://www.silicon.fr/feed
+#techworm-hacking,Tech worm Hacking,https://www.techworm.net/category/security-and-hacking-news/feed
+#techworm-security,Tech Worm Security,https://www.techworm.net/category/security-news/feed
+#theregister,The Register,https://www.theregister.com/security/headlines.atom
+#undernews,Undernews,https://www.undernews.fr/feed/atom
+#welive-malware,We Live Security Malware,https://www.welivesecurity.com/category/malware
+welive,We Live Security,https://www.welivesecurity.com/feed/
+#zdnet-security,ZDNet Security,https://www.zdnet.com/blog/security/rss.xml
+#zoneh,Zone-H,https://www.zone-h.org/rss/news

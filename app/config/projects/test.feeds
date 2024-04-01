@@ -1,0 +1,4 @@
+googlenews,Google News,https://news.google.com/rss?hl=en-US&gl=US&ceid=US:en
+googlenews-cyber,Google News Cyber,https://news.google.com/rss/search?q=cyber&hl=en-US&gl=US&ceid=US:en
+googlenews-technology,Google News Technology,https://news.google.com/rss/topics/CAAqJggKIiBDQkFTRWdvSUwyMHZNRGRqTVhZU0FtWnlHZ0pHVWlnQVAB?hl=en-US&gl=US&ceid=US:en
+bing-cybersecurity,Bing Cybersecurity,https://www.bing.com/news/search?q=cybersecurity&format=rss&setlang=en&cc=us

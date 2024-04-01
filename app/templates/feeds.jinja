@@ -1,0 +1,79 @@
+{% extends 'layout/base.jinja' %}
+
+{% block header %}
+<h3>Feeds</h3>
+<b>{{ data|length }}</b> items found</b>
+<hr />
+{% endblock %}
+
+{% block content %}
+<script>
+    function setEnable(button) {
+
+        if (button.getAttribute('data-enable') == 'True') {
+            button.setAttribute('data-enable', 'False')
+            button.innerHTML = '<i class="bi bi-toggle-off"></i>'
+            button.parentElement.parentElement.className = 'table-danger'
+            method = 'DELETE'
+        }
+        else {
+            button.setAttribute('data-enable', 'True')
+            button.innerHTML = '<i class="bi bi-toggle-on"></i>'
+            button.parentElement.parentElement.className = ''
+            method = 'PUT'
+        }
+
+        const options = {
+            method: method,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                id: button.getAttribute('data-id')
+            })
+        };
+
+        fetch('/feeds', options)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+    }
+</script>
+
+<table class="table table-striped table-hover table-borderless table-sm small">
+    <thead class="table-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Articles</th>
+            <th scope="col">Link</th>
+            <th scope="col">Creation</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in data %}
+
+        {% if item.enable %}
+        {% set class="" %}
+        {% set toggle="on" %}
+        {% else %}
+        {% set class="table-danger" %}
+        {% set toggle="off" %}
+        {% endif %}
+
+        <tr class="{{ class }}">
+            <td>
+                <button class="btn btn-sm" data-id="{{ item.id }}" data-enable="{{ item.enable }}"
+                    onclick="setEnable(this)">
+                    <i class="bi bi-toggle-{{ toggle }}"></i>
+                </button>
+            </td>
+            <td><a href="{{ url_for('articles',feed=item.id) }}">{{ item.id }}</a></td>
+            <th scope="row">{{ item.title }}</th>
+            <td><span class="badge rounded-pill bg-danger text-white">{{ item.articles }}</span></td>
+            <td><a href="{{ item.url }}" target="_new">{{ item.url }}</a></td>
+            <td>{{ item.created }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

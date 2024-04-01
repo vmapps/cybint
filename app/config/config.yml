@@ -1,0 +1,33 @@
+# --------------------------------------------------
+# Global configuration
+# --------------------------------------------------
+debug: True
+
+# --------------------------------------------------
+# App configuration
+# --------------------------------------------------
+app:
+  name: "CybInt "
+  description: "Cyber Intelligence Tool"
+  author: "VM Apps"
+  contact: "vmapps@github"
+  version: "v0.1"
+
+# --------------------------------------------------
+# Keyworks configuration
+# --------------------------------------------------
+mongo:
+  host: "mongo"
+  port: 27017
+  timeout: 5000
+
+# --------------------------------------------------
+# Keyworks configuration
+# --------------------------------------------------
+keywords:
+  min_length: 2
+  min_occurences: 3
+  tags:
+    - "CD"
+    - "FW"
+    - "NN"
