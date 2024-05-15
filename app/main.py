@@ -7,6 +7,7 @@
 
 from flask import Flask, render_template, request, session, flash, make_response, redirect, url_for
 
+import datetime
 import nltk
 import os
 import pymongo
@@ -30,6 +31,11 @@ app.config['SECRET_KEY'] = 'super secret key you will never guess'
 app.config['STATIC_FOLDER'] = 'static'
 app.config['PROJECTS'] = []
 app.config['app'] = config['app']
+
+@app.template_filter('fromtimestamp')
+def _filter_fromtimestamp(ts):
+    dt = datetime.datetime.fromtimestamp(ts)
+    return dt
 
 # Database connector to Mongo
 mongo = pymongo.MongoClient(
@@ -86,7 +92,7 @@ def before_request_func():
 def index():
 
     items = []
-    for obj_a in db['articles'].find().limit(5):
+    for obj_a in db['articles'].find().limit(5).sort('__imported',pymongo.DESCENDING):
         items.append(obj_a)
 
     # return redirect(url_for('feeds'))
@@ -130,7 +136,7 @@ def feeds():
 
         items = []
 
-        keys = db['feeds'].find().sort('id',1)
+        keys = db['feeds'].find().sort('id',pymongo.ASCENDING)
         for obj in keys:
 
             articles = db['articles'].find({'__feed':obj['id']})
@@ -166,7 +172,7 @@ def articles():
     feed = request.args.get('feed')
 
     items = []
-    for obj_a in db['articles'].find():
+    for obj_a in db['articles'].find().sort('__imported',pymongo.DESCENDING):
 
         # if searching by word, skip articles not matching
         if word and obj_a['title'].lower().find(word.lower())==-1:
@@ -192,7 +198,7 @@ def search():
         {'$or':[
             {'title':{'$regex':keyword,'$options':'i'}},
             {'summary':{'$regex':keyword,'$options':'i'}}
-        ]})
+        ]}).sort('__imported',pymongo.DESCENDING)
 
     items = []
     for obj_a in results:

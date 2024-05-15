@@ -11,9 +11,12 @@ import datetime
 import feedparser
 import glob
 import hashlib
+import json
 import os
 import pathlib
+import pymongo
 import socket
+import time
 import yaml
 
 # --------------------------------------------------
@@ -33,12 +36,18 @@ def loadConfig(filename):
     return cfg
 
 #
-# Get hash from string
+# Get hash from object
 #
-def getHash(buffer):
+def getHash(feed,article):
     
-    buffer = str(buffer).encode('utf-8')
-    hash = hashlib.md5(buffer).hexdigest()
+    # obj = str(obj).encode('utf-8')
+    obj = {
+        'feed': feed,
+        'title': article['title']
+    }
+
+    obj = json.dumps(obj).encode("utf-8")
+    hash = hashlib.md5(obj).hexdigest()
 
     return hash
 
@@ -130,7 +139,7 @@ def importFeeds(db,feeds):
 def importArticles(db):
 
     print('[INFO] getting feeds content ...')
-    res = db['feeds'].find().sort('id',1)
+    res = db['feeds'].find().sort('id',pymongo.ASCENDING)
 
     for idx,obj in enumerate(res):
 
@@ -179,12 +188,13 @@ def saveArticles(db,prefix,source,items):
     
     for idx,item in enumerate(items):
 
-        hash = getHash(item['title'])
+        hash = getHash(prefix,item)
 
         item['__hash'] = hash
         item['__feed'] = prefix
         item['__source'] = source
         item['__bookmark'] = False
+        item['__imported'] = int(time.time())
 
         res = db['articles'].find({'__hash':hash},{'_id':1})
 

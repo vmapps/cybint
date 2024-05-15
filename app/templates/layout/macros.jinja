@@ -57,13 +57,14 @@
     <table class="table table-borderless table-sm small">
         <tbody>
             <tr>
+                <td scope="col" class="col-1"><b>Imported:</b></td>
+                <td scope="col" class="col-2">
+                    {% if item.get('__imported') %}{{ item.__imported|fromtimestamp }}{%
+                    endif %}
+                </td>
                 <td scope="col" class="col-1"><b>Source:</b></td>
                 <td scope="col" class="col-2"><a href="{{ url_for('articles',feed=item.__feed) }}">{{
                         item.__source }}</a>
-                </td>
-                <td scope="col" class="col-1"><b>Published:</b></td>
-                <td scope="col" class="col-2">
-                    {% if item.get('published') %}{{ item.published }}{% endif %}
                 </td>
                 <td scope="col" class="col-1"><b>Author:</b></td>
                 <td scope="col" class="col-2">
